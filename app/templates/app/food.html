@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Foods{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group">
+       <a href="{%url 'Foods' %}" class="list-group-item list-group-item-action" aria-current="true">All Foods</a>
+       <a href="{%url 'Foodsdata' 'Oil'%}" class="list-group-item list-group-item-action" aria-current="true">Oil</a>
+       <a href="{%url 'Foodsdata' 'Soaps'%}" class="list-group-item list-group-item-action" aria-current="true">Soaps</a>
+       <a href="{%url 'Foodsdata' 'PlasticProduct'%}" class="list-group-item list-group-item-action" aria-current="true">PlasticProduct</a>
+       <a href="{%url 'Foodsdata' 'Below'%}" class="list-group-item list-group-item-action" aria-current="true">Below 600</a>
+       <a href="{%url 'Foodsdata' 'Above'%}" class="list-group-item list-group-item-action" aria-current="true">Above 600</a>
+    </div> 
+  </div>
+  <div class="col-sm-9 ">
+    <div class="row">
+      {% for product in Foods %}
+      <div class="col-5 text-center mb-5">
+        <a href="{%url 'product-detail' product.id%}" class="btn">
+          <div class="item">
+            <img src="{{product.product_image.url}}" alt="" height="300" class="">
+            <div class="fw-bold mt-4"><h5><b>{{product.brand}}</b></h5></div>
+            <div class="fw-bold">Rs. {{product.discounted_price}}<br>
+            <small class="fw-light text-decoration-line-through">{{product.selling_price}}></small></div>
+          </div>
+        </a>
+        <hr>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
